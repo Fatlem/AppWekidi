@@ -17,7 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 # 🍔 Burger Themed Flutter App
 
-Welcome to the **Burger Themed Flutter App**! This project serves as a starting point for your Flutter journey. Dive in, explore, and customize your way to a deliciously designed application!
+Welcome To Aplikasi Flutter Wekidiくん! Proyek ini berfungsi sebagai titik awal perjalanan Flutter Anda. Terjunlah, jelajahi, dan sesuaikan cara Anda untuk membuat aplikasi yang dirancang dengan lezat!
 
 ---
 
@@ -33,8 +33,4 @@ Welcome to the **Burger Themed Flutter App**! This project serves as a starting 
 
 ## 🚀 Getting Started
 
-To get started with this Flutter app, follow the steps below:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Fatlem/your-repo-name.git
