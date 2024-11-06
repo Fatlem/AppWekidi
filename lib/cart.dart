@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:restofatlem_14624/product.dart';
+import 'package:wekidi/product.dart';
 
 class Cart extends StatefulWidget {
   final List<Map<String, dynamic>> cartItems;

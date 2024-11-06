@@ -1,4 +1,4 @@
-package com.example.restofatlem_14624
+package com.example.wekidi
 
 import io.flutter.embedding.android.FlutterActivity
 

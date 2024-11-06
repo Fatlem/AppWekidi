@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:restofatlem_14624/thankyou.dart';
+import 'package:wekidi/thankyou.dart';
 
 class Checkout extends StatefulWidget {
   @override

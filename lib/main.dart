@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:restofatlem_14624/welcome.dart';
-import 'package:restofatlem_14624/login.dart';
-import 'package:restofatlem_14624/dashboard.dart';
-import 'package:restofatlem_14624/update_user.dart';
-import 'package:restofatlem_14624/register.dart';
-import 'package:restofatlem_14624/cart.dart';
-import 'package:restofatlem_14624/checkout.dart';
-import 'package:restofatlem_14624/payment.dart';
-import 'package:restofatlem_14624/thankyou.dart';
+import 'welcome.dart';
+import 'login.dart';
+import 'dashboard.dart';
+import 'update_user.dart';
+import 'register.dart';
+import 'cart.dart';
+import 'checkout.dart';
+import 'payment.dart';
+import 'thankyou.dart';
+import 'profile.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,21 +19,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Fatlem Wekidi くん', // Nama aplikasi
+      title: 'Fatlem Wekidi くん',
       theme: ThemeData(
-        primarySwatch: Colors.blue, // Tema utama aplikasi
+        primarySwatch: Colors.blue,
       ),
-      initialRoute: '/', // Rute awal aplikasi, menampilkan splash screen
+      initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),
         '/login': (context) => Login(),
         '/register': (context) => Register(),
         '/dashboard': (context) => Dashboard(),
         '/update-user': (context) => UpdateUser(),
-        '/cart': (context) => Cart(cartItems: []), // Inisialisasi keranjang kosong
+        '/cart': (context) => Cart(cartItems: []),
         '/checkout': (context) => Checkout(),
         '/payment': (context) => Payment(),
         '/thankyou': (context) => ThankYouScreen(),
+        '/profile': (context) => Profile(), // Tambahkan rute untuk halaman profil
       },
     );
   }

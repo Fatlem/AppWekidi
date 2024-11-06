@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.restofatlem_14624"
+    namespace = "com.example.wekidi"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

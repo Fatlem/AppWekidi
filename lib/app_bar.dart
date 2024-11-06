@@ -5,7 +5,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: false, // Removes the back button
+      automaticallyImplyLeading: false,
       title: Text(
         'Dashboard',
         style: TextStyle(fontFamily: 'DynaPuff'),
@@ -13,23 +13,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: <Widget>[
         PopupMenuButton<String>(
           onSelected: (String result) {
-            if (result == 'Call Center') {
-              _makePhoneCall('tel:+62123456789'); // Update with the appropriate phone number
-            } else if (result == 'SMS Center') {
-              _sendSMS('Hello, I need assistance!', '+62123456789'); // Update with the appropriate SMS number
-            } else if (result == 'Maps') {
-              _launchMaps('https://www.google.com/maps'); // Update with the appropriate map URL
-            } else if (result == 'Update User') {
-              Navigator.pushNamed(context, '/update-user');
-            }
+            _handleMenuSelection(result, context);
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             const PopupMenuItem<String>(
-              value: 'Call Center',
+              value: 'CallCenter',
               child: Text('Call Center', style: TextStyle(fontFamily: 'DynaPuff')),
             ),
             const PopupMenuItem<String>(
-              value: 'SMS Center',
+              value: 'SMSCenter',
               child: Text('SMS Center', style: TextStyle(fontFamily: 'DynaPuff')),
             ),
             const PopupMenuItem<String>(
@@ -37,8 +29,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Text('Maps', style: TextStyle(fontFamily: 'DynaPuff')),
             ),
             const PopupMenuItem<String>(
-              value: 'Update User',
+              value: 'UpdateUser',
               child: Text('Update Profile', style: TextStyle(fontFamily: 'DynaPuff')),
+            ),
+            const PopupMenuItem<String>(
+              value: 'Profile',
+              child: Text('Profile', style: TextStyle(fontFamily: 'DynaPuff')),
+            ),
+            const PopupMenuItem<String>(
+              value: 'Logout',
+              child: Text('Logout', style: TextStyle(fontFamily: 'DynaPuff')),
             ),
           ],
         ),
@@ -46,32 +46,63 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  // Method to make a phone call
-  Future<void> _makePhoneCall(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+  void _handleMenuSelection(String result, BuildContext context) {
+    switch (result) {
+      case 'CallCenter':
+        _makeWhatsAppCall('+6285156504046', context);
+        break;
+      case 'SMSCenter':
+        _sendWhatsAppMessage('+6285156504046', context);
+        break;
+      case 'Maps':
+        _launchMaps('https://www.google.com/maps', context);
+        break;
+      case 'UpdateUser':
+        Navigator.pushNamed(context, '/update-user');
+        break;
+      case 'Profile':
+        Navigator.pushNamed(context, '/profile');
+        break;
+      case 'Logout':
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/login',
+              (Route<dynamic> route) => false,
+        );
+        break;
     }
   }
 
-  // Method to send an SMS
-  Future<void> _sendSMS(String message, String phone) async {
-    final Uri uri = Uri(scheme: 'sms', path: phone, queryParameters: {'body': message});
-    if (await canLaunch(uri.toString())) {
-      await launch(uri.toString());
+  Future<void> _makeWhatsAppCall(String phoneNumber, BuildContext context) async {
+    final Uri whatsappUri = Uri.parse('https://wa.me/$phoneNumber');
+    if (await canLaunch(whatsappUri.toString())) {
+      await launch(whatsappUri.toString());
     } else {
-      throw 'Could not launch SMS';
+      _showSnackBar(context, 'Could not launch WhatsApp');
     }
   }
 
-  // Method to launch maps
-  Future<void> _launchMaps(String url) async {
+  Future<void> _sendWhatsAppMessage(String phoneNumber, BuildContext context) async {
+    final Uri whatsappUri = Uri.parse('https://wa.me/$phoneNumber?text=Hallo, Saya Ingin Memesan Burger Wekidi...');
+    if (await canLaunch(whatsappUri.toString())) {
+      await launch(whatsappUri.toString());
+    } else {
+      _showSnackBar(context, 'Could not send message via WhatsApp');
+    }
+  }
+
+  Future<void> _launchMaps(String url, BuildContext context) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch Maps';
+      _showSnackBar(context, 'Could not launch Maps');
     }
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
